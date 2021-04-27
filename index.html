@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tech Weekly</title>
+    <title>Daily News</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link rel="alternate" type="application/rss+json" title="Recent Entries" href="http://baooab.github.io/tech-weekly/rss.json">
+    <link rel="alternate" type="application/rss+json" title="Recent Entries" href="http://baooab.github.io/daily-news/rss.json">
     <style>
       img {
         display: none;
@@ -21,15 +21,21 @@
         border-radius: .25rem .5rem;
         text-decoration: none;
       }
+
+      details[open] > summary {
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
   <div class="container">
     <section class="section">
       <h1 class="title">
-        Tech Weekly
+        Daily News
       </h1>
-      <div class="issues"></div>
+      <div class="issues01"></div>
+      <hr>
+      <div class="issues02"></div>
     </section>
   </div>
   </body>
