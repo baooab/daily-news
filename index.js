@@ -6,11 +6,11 @@ let parser = new Parser({
 const fs = require('fs/promises');
 const process = require('process');
 
-
 async function main() {
-    const url = 'https://rsshub.app/zaobao/realtime/china';
-
-    let feed = await parser.parseURL(url);
+    let [zaobaoFeed, solidotFeed] = await Promise.all(
+      parser.parseURL('https://rsshub.app/zaobao/realtime/china'), 
+      parser.parseURL('https://rsshub.app/solidot/www')
+    );
 
     console.log(`successfully generating new feed.`);
 
@@ -20,8 +20,9 @@ async function main() {
     await fs.mkdir('./dist');
     console.log(`successfully create ./dist`);
 
-    await fs.writeFile('./dist/rss.json', JSON.stringify(feed));
-    console.log(`successfully write rss.json`);
+    await fs.writeFile('./dist/zaobao.json', JSON.stringify(zaobaoFeed));
+    await fs.writeFile('./dist/solidot.json', JSON.stringify(solidotFeed));
+    console.log(`successfully write zaobao.json, solidot.json`);
 
     await fs.copyFile('./template/index.html', `./dist/index.html`);
     await fs.copyFile('./template/page.js', `./dist/page.js`);

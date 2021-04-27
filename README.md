@@ -1,3 +1,3 @@
-# tech-weekly
+# daily news
 
-[baooab.github.io/tech-weekly/](https://baooab.github.io/tech-weekly/)
+[baooab.github.io/daily-news/](https://baooab.github.io/daily-news/)
