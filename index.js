@@ -7,10 +7,10 @@ const fs = require('fs/promises');
 const process = require('process');
 
 async function main() {
-    let [zaobaoFeed, solidotFeed] = await Promise.all(
+    let [zaobaoFeed, solidotFeed] = await Promise.all([
       parser.parseURL('https://rsshub.app/zaobao/realtime/china'), 
       parser.parseURL('https://rsshub.app/solidot/www')
-    );
+    ]);
 
     console.log(`successfully generating new feed.`);
 
