@@ -8,7 +8,7 @@ function fetchNews(url, selector) {
     const issues = document.querySelector(selector);
     const fragment = document.createDocumentFragment();
 
-    const title = document.createElement('div');
+    const title = document.createElement('summary');
     title.innerText = res.title
     title.classList.add('is-6', 'title')
     const lastBuildDate = document.createElement('small');
@@ -24,7 +24,7 @@ function fetchNews(url, selector) {
       const content = document.createElement('div');
       content.classList.add('content', 'my-3', 'p-3', 'notification')
       const timeObj = new Date(i.pubDate);
-      h2.innerHTML = `${i.title} （<a href="${i.link}" target="_blank">${timeObj.toLocaleTimeString()}</a>）`;
+      h2.innerHTML = `${i.title} （${timeObj.toLocaleTimeString()} <a href="${i.link}" target="_blank" title=""></a>）`;
       content.innerHTML = i.content;
 
       issue.appendChild(h2);
@@ -40,4 +40,5 @@ function fetchNews(url, selector) {
 
 
 fetchNews('./zaobao.json', '.issues01')
-fetchNews('./solidot.json', '.issues02')
+fetchNews('./reuters.json', '.issues02')
+fetchNews('./solidot.json', '.issues03')
