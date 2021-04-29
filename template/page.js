@@ -22,7 +22,7 @@ function fetchNews(url, selector) {
       const issue = document.createElement('details');
       const h2 = document.createElement('summary');
       const content = document.createElement('div');
-      content.classList.add('box', 'content')
+      content.classList.add('content', 'my-3', 'p-3', 'notification')
       const timeObj = new Date(i.pubDate);
       h2.innerHTML = `${i.title} （<a href="${i.link}" target="_blank">${timeObj.toLocaleTimeString()}</a>）`;
       content.innerHTML = i.content;
