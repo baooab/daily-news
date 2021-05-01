@@ -40,5 +40,6 @@ function fetchNews(url, selector) {
 
 
 fetchNews('./zaobao.json', '.issues01')
-fetchNews('./reuters.json', '.issues02')
+fetchNews('./eeo.json', '.issues02')
 fetchNews('./solidot.json', '.issues03')
+fetchNews('./weibo.json', '.issues03')
