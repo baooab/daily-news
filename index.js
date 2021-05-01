@@ -9,7 +9,7 @@ const process = require('process');
 async function main() {
     let [zaobaoFeed, reutersFeed, solidotFeed] = await Promise.all([
       parser.parseURL('https://rsshub.app/zaobao/realtime/china'),
-      parser.parseURL('https://rsshub.app/reuters/channel/cn/analyses'),
+      parser.parseURL('https://rsshub.app/eeo/01'),
       parser.parseURL('https://rsshub.app/solidot/www')
     ]);
 
