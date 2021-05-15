@@ -1,4 +1,4 @@
-function fetchNews(url, selector) {
+function fetchNews(url, selector, mode = 'full') {
   fetch(url)
   .then(async function (response) {
     const res = await response.json();
@@ -16,29 +16,47 @@ function fetchNews(url, selector) {
     lastBuildDate.classList.add('ml-3')
     title.appendChild(lastBuildDate)
 
+    const contentWrapper = document.createElement(mode === 'simple' ? 'ol' : 'div');
+
     fragment.appendChild(title)
+    fragment.appendChild(contentWrapper)
 
     items.forEach(i => {
-      const issue = document.createElement('details');
-      const h2 = document.createElement('summary');
-      const content = document.createElement('div');
-      content.classList.add('content', 'my-3', 'p-3', 'notification')
-      const timeObj = new Date(i.pubDate);
-      h2.innerHTML = `${i.title} （${timeObj.toLocaleTimeString()} <a href="${i.link}" target="_blank" title=""></a>）`;
-      content.innerHTML = i.content;
+      let issue = null;
 
-      issue.appendChild(h2);
-      issue.appendChild(content);
-      fragment.appendChild(issue);
+      if (mode === 'simple') {
+        issue = document.createElement('li');
+        const content = document.createElement('p');
+        content.innerHTML = `${i.title} （<a href="${i.link}" target="_blank" title=""></a>）`;
+        issue.appendChild(content);
+      } else {
+        issue = document.createElement('details');
+        const h2 = document.createElement('summary');
+        const content = document.createElement('div');
+        content.classList.add('content', 'my-3', 'p-3', 'notification')
+        const timeObj = new Date(i.pubDate);
+        h2.innerHTML = `${i.title} （${timeObj.toLocaleTimeString()} <a href="${i.link}" target="_blank" title=""></a>）`;
+        content.innerHTML = i.content;
+
+        issue.appendChild(h2);
+        issue.appendChild(content);
+
+      }
+
+      
+      contentWrapper.appendChild(issue);
     });
 
     issues.appendChild(fragment);
   })
 }
 
-
-
+await fs.writeFile('./dist/zaobao.json', JSON.stringify(zaobaoFeed));
+await fs.writeFile('./dist/solidot.json', JSON.stringify(solidotFeed));
+await fs.writeFile('./dist/xwlb.json', JSON.stringify(xwlbFeed));
+await fs.writeFile('./dist/bjnews.json', JSON.stringify(bjnewsFeed));
 
 fetchNews('./zaobao.json', '.issues01')
-fetchNews('./reuters.json', '.issues02')
-fetchNews('./solidot.json', '.issues03')
+fetchNews('./solidot.json', '.issues02')
+fetchNews('./bjnews.json', '.issues03')
+fetchNews('./xwlb.json', '.issues04')
