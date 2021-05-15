@@ -51,11 +51,6 @@ function fetchNews(url, selector, mode = 'full') {
   })
 }
 
-await fs.writeFile('./dist/zaobao.json', JSON.stringify(zaobaoFeed));
-await fs.writeFile('./dist/solidot.json', JSON.stringify(solidotFeed));
-await fs.writeFile('./dist/xwlb.json', JSON.stringify(xwlbFeed));
-await fs.writeFile('./dist/bjnews.json', JSON.stringify(bjnewsFeed));
-
 fetchNews('./zaobao.json', '.issues01')
 fetchNews('./solidot.json', '.issues02')
 fetchNews('./bjnews.json', '.issues03')
