@@ -7,11 +7,12 @@ const fs = require('fs/promises');
 const process = require('process');
 
 async function main() {
-    let [zaobaoFeed, xwlbFeed, solidotFeed, bjnewsFeed] = await Promise.all([
+    let [zaobaoFeed, xwlbFeed, solidotFeed, bjnewsFeed, weiboFeed] = await Promise.all([
       parser.parseURL('https://rsshub.app/zaobao/realtime/china'),
       parser.parseURL('https://rsshub.app/cctv/xwlb'),
       parser.parseURL('https://rsshub.app/solidot/www'),
       parser.parseURL('https://rsshub.app/bjnews/realtime'),
+      parser.parseURL('https://rsshub.app/weibo/search/hot')
     ]);
 
     console.log(`successfully generating new feed.`);
@@ -26,7 +27,8 @@ async function main() {
     await fs.writeFile('./dist/solidot.json', JSON.stringify(solidotFeed));
     await fs.writeFile('./dist/xwlb.json', JSON.stringify(xwlbFeed));
     await fs.writeFile('./dist/bjnews.json', JSON.stringify(bjnewsFeed));
-    console.log(`successfully write zaobao.json, solidot.json, xwlb.json, bjnews.json`);
+    await fs.writeFile('./dist/weibo.json', JSON.stringify(weiboFeed));
+    console.log(`successfully write zaobao.json, solidot.json, xwlb.json, bjnews.json, weibo.json`);
 
     await fs.copyFile('./template/index.html', `./dist/index.html`);
     await fs.copyFile('./template/page.js', `./dist/page.js`);
